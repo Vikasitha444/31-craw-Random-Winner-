@@ -13,7 +13,7 @@
         }
 
         body {
-            background: #f0f2f5;
+            background-color: #111;
             min-height: 100vh;
             padding: 20px;
         }
@@ -23,22 +23,77 @@
             margin: 0 auto;
         }
 
-        .header {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+        .dashboard-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-container {
+            background: rgba(255, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .logo-img {
+            width: 60px;
+            height: auto;
+        }
+
+        .header-text {
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .total-count {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .draw-button {
+            background: linear-gradient(135deg, #ff1a1a, #cc0000);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+        }
+
+        .draw-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.3);
+            background: linear-gradient(135deg, #ff3333, #e60000);
         }
 
         .participants-table {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         table {
@@ -46,59 +101,92 @@
             border-collapse: collapse;
         }
 
-        th, td {
-            padding: 15px;
+        /* Define specific widths for each column */
+        table th:nth-child(1),
+        table td:nth-child(1) {
+            width: 33%;
             text-align: left;
-            border-bottom: 1px solid #eee;
+            padding-left: 20px;
+        }
+
+        table th:nth-child(2),
+        table td:nth-child(2) {
+            width: 33%;
+            text-align: left;
+        }
+
+        table th:nth-child(3),
+        table td:nth-child(3) {
+            width: 34%;
+            text-align: left;
         }
 
         th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #2c3e50;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 14px;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        td {
+            padding: 15px 20px;
+            color: #ddd;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         tr:hover {
-            background: #f8f9fa;
-        }
-
-        .draw-button {
-            background: #3498db;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
-        }
-
-        .draw-button:hover {
-            background: #2980b9;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .new-entry {
             animation: highlight 2s ease-out;
         }
 
-        .total-count {
-            color: #666;
-            margin-top: 5px;
-            font-size: 14px;
+        @keyframes highlight {
+            0% { background: rgba(255, 0, 0, 0.15); }
+            100% { background: transparent; }
         }
 
-        @keyframes highlight {
-            0% { background-color: #fff3cd; }
-            100% { background-color: transparent; }
+        .empty-state {
+            padding: 30px;
+            text-align: center;
+            color: #888;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <div>
-                <h1>ලියාපදිංචි වූ සහභාගිවන්නන්</h1>
-                <p class="total-count">මුළු සහභාගිවන්නන්: <span id="participantCount">0</span></p>
+        <div class="dashboard-header">
+            <div class="header-left">
+                <div class="logo-container">
+                    <img src="logo.jpg" alt="31CREW Professional" class="logo-img">
+                </div>
+                <div class="header-text">
+                    <h1>ලියාපදිංචි වූ සහභාගිවන්නන්</h1>
+                    <p class="total-count">මුළු සහභාගිවන්නන්: <span id="participantCount">0</span></p>
+                </div>
             </div>
             <button class="draw-button" onclick="window.location.href='raffel.html'">දිනුම් ඇදීම</button>
         </div>
@@ -108,7 +196,7 @@
                 <thead>
                     <tr>
                         <th>නම</th>
-                        <th>WhatsApp අංකය</th>
+                        <th>WHATSAPP අංකය</th>
                         <th>වේලාව</th>
                     </tr>
                 </thead>
@@ -143,7 +231,8 @@
             const data = snapshot.val();
             
             if (!data) {
-                tableBody.innerHTML = '<tr><td colspan="3">සහභාගිවන්නන් නැත</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="3" class="empty-state">සහභාගිවන්නන් නැත</td></tr>';
+                document.getElementById('participantCount').textContent = '0';
                 return;
             }
 
